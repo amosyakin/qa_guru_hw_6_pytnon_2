@@ -8,7 +8,6 @@ def test_dark_theme_by_time():
     current_time = time(hour=23)
     # TODO переключите темную тему в зависимости от времени суток (с 22 до 6 часов утра - ночь)
 
-    is_dark_theme = None
     if time(hour=6) <= current_time < time(hour=22):
         is_dark_theme = False
     else:
@@ -29,7 +28,6 @@ def test_dark_theme_by_time_and_user_choice():
     # TODO переключите темную тему в зависимости от времени суток,
     #  но учтите что темная тема может быть включена вручную
 
-    is_dark_theme = None
     if dark_theme_enabled_by_user is True:
         is_dark_theme = True
     elif dark_theme_enabled_by_user is False:
@@ -87,7 +85,9 @@ def test_find_suitable_user():
 def change_func(func_name, **kwargs):
     formatted_func_name = func_name.__name__.replace('_', ' ').title()
     args_list = [f"{value}" for key, value in kwargs.items()]
-    return f"{formatted_func_name} [{', '.join(args_list)}]"
+    print_name = f"{formatted_func_name} [{', '.join(args_list)}]"
+    print(print_name)
+    return print_name
 
 
 def test_readable_function():
