@@ -40,7 +40,7 @@ def test_dark_theme_by_time_and_user_choice():
         else:
             is_dark_theme = True
     else:
-        raise AssertionError ("dark_theme_enabled_by_user принимает не булевое значение")
+        raise AssertionError("dark_theme_enabled_by_user принимает не булевое значение")
 
     assert is_dark_theme is True
 
@@ -85,12 +85,10 @@ def test_find_suitable_user():
 # >>> open_browser(browser_name="Chrome")
 # "Open Browser [Chrome]"
 def change_func(func_name, **kwargs):
-    func_name_str = func_name.__name__
-    b = func_name_str.replace('_', ' ')
-    c = b.title()
-    for name, value in kwargs.items():
-        d = value
-    return d
+    formatted_func_name = func_name.__name__.replace('_', ' ').title()
+    args_list = [f"{value}" for key, value in kwargs.items()]
+    return f"{formatted_func_name} [{', '.join(args_list)}]"
+
 
 def test_readable_function():
     open_browser(browser_name="Chrome")
@@ -99,16 +97,15 @@ def test_readable_function():
 
 
 def open_browser(browser_name):
-    actual_result = None
-    a = change_func(open_browser)
+    actual_result = change_func(open_browser, browser_name=browser_name)
     assert actual_result == "Open Browser [Chrome]"
 
 
 def go_to_companyname_homepage(page_url):
-    actual_result = None
+    actual_result = change_func(go_to_companyname_homepage, page_url=page_url)
     assert actual_result == "Go To Companyname Homepage [https://companyname.com]"
 
 
 def find_registration_button_on_login_page(page_url, button_text):
-    actual_result = None
+    actual_result = change_func(find_registration_button_on_login_page, page_url=page_url, button_text=button_text)
     assert actual_result == "Find Registration Button On Login Page [https://companyname.com/login, Register]"
